@@ -6,37 +6,36 @@ pipeline {
     }
 
     stages {
-        stage('Cloner le dépôt') {
+
+        stage('Checkout') {
             steps {
-                git url: 'https://github.com/DorraOmri/TP2_Jenkins_Git.git', branch: 'main'
+                echo 'Récupération du code source'
+                checkout scm
             }
         }
 
-        stage('Étape 1 : Vérification du dépôt') {
+        stage('Build') {
             steps {
-                sh 'echo "=== Étape 1 : Vérification du dépôt ==="'
-                sh 'git status'
-            }
-        }
-
-        stage('Étape 2 : Afficher le contenu du projet') {
-            steps {
-                sh 'echo "=== Étape 2 : Afficher le contenu du projet ==="'
+                echo 'Préparation du projet'
                 sh 'ls -la'
+                sh 'test -f index.html'
+                sh 'test -f style.css'
             }
         }
 
-        stage('Étape 3 : Simuler un déploiement local') {
+        stage('Test') {
             steps {
-                sh 'echo "=== Étape 3 : Simuler un déploiement local ==="'
-                sh 'echo "Le fichier index.html est prêt à être affiché"'
+                echo 'Vérification des fichiers'
+                sh 'test -s index.html'
+                sh 'test -s style.css'
+                echo 'Tous les fichiers sont présents.'
             }
         }
 
-        stage('Étape 4 : Fin du build') {
+        stage('Deploy') {
             steps {
-                sh 'echo "=== Étape 4 : Fin du build ==="'
-                sh 'echo "SUCCESS"'
+                echo 'Simulation du déploiement'
+                echo 'Le projet est prêt à être déployé.'
             }
         }
     }

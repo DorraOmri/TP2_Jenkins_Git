@@ -20,6 +20,8 @@ pipeline {
                 sh 'ls -la'
                 sh 'test -f index.html'
                 sh 'test -f style.css'
+                sh '/usr/local/bin/docker --version'
+                sh '/usr/local/bin/docker info'
             }
         }
 
@@ -29,6 +31,7 @@ pipeline {
                 sh 'test -s index.html'
                 sh 'test -s style.css'
                 echo 'Tous les fichiers sont présents.'
+                emailext body: 'error de jenkins', subject: 'error jenkins', to: 'dorraomri73@gmail.com'
             }
         }
 

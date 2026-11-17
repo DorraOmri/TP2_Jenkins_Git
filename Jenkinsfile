@@ -39,13 +39,6 @@ pipeline {
         '''
       }
     }
-
-    stage('Deploy') {
-      steps {
-        sh 'docker compose -p tp2_jenkins_git up -d --force-recreate'
-        sh 'docker ps'
-      }
-    }
   }
 
   post {

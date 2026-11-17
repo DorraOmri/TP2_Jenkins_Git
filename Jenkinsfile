@@ -3,7 +3,6 @@ pipeline {
   options { timestamps() }
 
   environment {
-    // Permet à Jenkins de trouver la commande docker sur Mac
     PATH  = "/usr/local/bin:/opt/homebrew/bin:/Applications/Docker.app/Contents/Resources/bin:${env.PATH}"
     IMAGE = 'monapp'
     TAG   = "build-${env.BUILD_NUMBER}"
